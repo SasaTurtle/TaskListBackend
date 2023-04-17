@@ -1,0 +1,34 @@
+# App Properties
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    platform: mariadb
+    //url: jdbc:mariadb://host.docker.internal:3306/task
+    url: jdbc:mariadb://localhost:3306/tasklist
+    username: root
+    password: slunicko
+    testWhileIdle: true
+    validationQuery: SELECT 1
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 15
+      minimum-pool-size: 50
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      generate-ddl: false
+      jdbc:
+        lob:
+          non_contextual_creation: true
+      dialect: org.hibernate.dialect.MariaDB102Dialect
+      id:
+        new_generator_mappings: true
+  main:
+    allow-circular-references: true
+jwt:
+  secret:dfjngTTljfldjgflkdjlk:
+
+tasklistbackend:
+  app:
+    jwtSecret: 928fbe46c9b19666fd594e4b297ffe77c985bcd24c6119d2b986943a0116dad5687fecfb736735647ac8ebea8b186be39542fac5c1cf17392467af73a2636d83
+    jwtExpirationMs: 86400000
