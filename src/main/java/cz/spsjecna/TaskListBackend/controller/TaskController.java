@@ -36,6 +36,11 @@ public class TaskController {
     return "Public Content.";
   }
 
+  /**
+   *
+   * @param token
+   * @return
+   */
   @GetMapping("/")
   @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
   public ResponseEntity<List<TaskModel>> getTasks(@RequestHeader (name="Authorization") String token) {
@@ -46,6 +51,7 @@ public class TaskController {
 
       if (u != null) {
         result = taskService.ReadTasks(u.get().getId());
+        log.info("TASK REQUEST: " + u.get().getUsername());
       }
       return ResponseEntity.ok(result);
     }
@@ -55,14 +61,21 @@ public class TaskController {
   }
   }
 
+  /**
+   *
+   * @param tasks
+   * @param token
+   * @return
+   */
   @PostMapping("/")
   @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
   public Boolean createTask(@RequestBody TaskDTO[] tasks, @RequestHeader (name="Authorization") String token) {
     String userName = jwtUtils.getUserNameFromJwtToken(token.replace("Bearer ", ""));
     Optional<User> u = userRepository.findByUsername(userName);
     boolean result = false;
-    if (u != null) {
+    if (u != null && tasks.length>0) {
       result = taskService.SaveTasks(tasks,u.get().getId());
+      log.info("CREATED TASK: " + u.get().getUsername() + " | TASK NAME: " + tasks[0].getName());
     }
 
 

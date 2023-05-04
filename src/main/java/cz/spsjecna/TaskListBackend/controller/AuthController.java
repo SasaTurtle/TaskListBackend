@@ -43,6 +43,11 @@ public class AuthController {
   @Autowired
   JwtUtils jwtUtils;
 
+  /**
+   *
+   * @param loginRequest
+   * @return
+   */
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
@@ -62,23 +67,31 @@ public class AuthController {
                          userDetails.getUsername(), 
                          userDetails.getEmail(), 
                          roles));
+    //log.info("SIGN IN: " + userDetails.getUsername());
   }
 
+  /**
+   *
+   * @param signUpRequest
+   * @return
+   */
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
           .badRequest()
           .body(new MessageResponse("Error: Username is already taken!"));
+      //log.warn("Error: Username is already taken! " + signUpRequest.getUsername());
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
       return ResponseEntity
           .badRequest()
           .body(new MessageResponse("Error: Email is already in use!"));
+      //log.warn("Error: Email is already in use! " + signUpRequest.getEmail());
     }
 
-    // Create new user's account
+    // Creates a new user's account
     User user = new User(signUpRequest.getUsername(), 
                signUpRequest.getEmail(),
                encoder.encode(signUpRequest.getPassword()));
@@ -117,5 +130,6 @@ public class AuthController {
     userRepository.save(user);
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    //log.info("REGISTERED: " + user.getUsername());
   }
 }
