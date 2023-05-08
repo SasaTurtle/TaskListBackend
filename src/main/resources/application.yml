@@ -29,7 +29,7 @@
 
 spring:
   jpa:
-    database: db2b50jshom4fp
+    database: POSTGRESQL
     show-sql: true
     hibernate:
       ddl-auto: create
