@@ -1,6 +1,6 @@
 package cz.spsjecna.TaskListBackend.payload.response;
 
-public class MessageResponse {
+public final class MessageResponse {
   private String message;
 
   public MessageResponse(String message) {

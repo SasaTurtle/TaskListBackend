@@ -2,6 +2,9 @@ package cz.spsjecna.TaskListBackend.payload.request;
 
 import java.util.Set;
 
+/**
+ *
+ */
 public class SignupRequest {
   //@NotBlank
   //@Size(min = 3, max = 20)

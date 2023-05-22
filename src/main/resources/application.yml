@@ -1,32 +1,4 @@
 # App Properties
-
-#spring:
-#  datasource:
-#    driver-class-name: org.mariadb.jdbc.Driver
-#    platform: mariadb
-#    //url: jdbc:mariadb://host.docker.internal:3306/task
-#    url: jdbc:postgress://localhost:3306/tasklist
-#    username: root
-#    password: slunicko
-#    testWhileIdle: true
-#    validationQuery: SELECT 1
-#    hikari:
-#      connection-timeout: 20000
-#      minimum-idle: 15
-#      minimum-pool-size: 50
-#  jpa:
-#    hibernate:
-#      ddl-auto: validate
-#      generate-ddl: false
-#      jdbc:
-#        lob:
-#          non_contextual_creation: true
-#      dialect: org.hibernate.dialect.MariaDB102Dialect
-#      id:
-#        new_generator_mappings: true
-#  main:
-#    allow-circular-references: true
-
 spring:
   jpa:
     database: POSTGRESQL

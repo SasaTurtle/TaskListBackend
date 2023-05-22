@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -13,9 +14,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskModel {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    @Column(name = "id", nullable = false, unique = true, columnDefinition = "uuid")
+    private UUID id;
+
     @Column(name="name")
     private String name;
     @Column(name="description")
@@ -31,7 +35,7 @@ public class TaskModel {
     @Column(name="userid")
     private Long userid;
 
-    public TaskModel(Long id, String name, String description, Date dateFrom, Date dateTo, TaskDTO.Priority priority, TaskDTO.Status status, Long userID) {
+    public TaskModel(UUID id, String name, String description, Date dateFrom, Date dateTo, TaskDTO.Priority priority, TaskDTO.Status status, Long userID) {
         this.id = id;
         this.name = name;
         this.description = description;

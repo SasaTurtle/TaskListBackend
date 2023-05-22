@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.springframework.http.ResponseEntity.ok;
 
@@ -79,6 +80,19 @@ public class TaskController {
     }
 
 
+    return result;
+  }
+
+  @DeleteMapping("/")
+  @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
+  public Boolean deleteTask(@RequestBody UUID taskId, @RequestHeader (name="Authorization") String token) {
+    String userName = jwtUtils.getUserNameFromJwtToken(token.replace("Bearer ", ""));
+    Optional<User> u = userRepository.findByUsername(userName);
+    boolean result = false;
+    if (u != null) {
+      result = taskService.DeleteTask(taskId,u.get().getId());
+      log.info("DELETED TASK: " + u.get().getUsername() + " | TASK ID: " + taskId);
+    }
     return result;
   }
 

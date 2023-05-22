@@ -25,6 +25,13 @@ public class UserDetailsImpl implements UserDetails {
 
   private Collection<? extends GrantedAuthority> authorities;
 
+  /**
+   * @param id
+   * @param username
+   * @param email
+   * @param password
+   * @param authorities
+   */
   public UserDetailsImpl(Long id, String username, String email, String password,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
@@ -90,6 +97,10 @@ public class UserDetailsImpl implements UserDetails {
     return true;
   }
 
+  /**
+   * @param o
+   * @return
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o)
