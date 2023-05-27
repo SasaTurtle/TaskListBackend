@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.UUID;
 
+
 @Data
 @Entity
 @Table(name = "task")
@@ -16,7 +17,6 @@ import java.util.UUID;
 public class TaskModel {
 
     @Id
-    @GeneratedValue
     @Column(name = "id", nullable = false, unique = true, columnDefinition = "uuid")
     private UUID id;
 

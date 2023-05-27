@@ -1,6 +1,7 @@
 package cz.spsjecna.TaskListBackend.controller;
 
 import cz.spsjecna.TaskListBackend.model.TaskDTO;
+import cz.spsjecna.TaskListBackend.model.TaskDeleteDTO;
 import cz.spsjecna.TaskListBackend.model.TaskModel;
 import cz.spsjecna.TaskListBackend.model.User;
 import cz.spsjecna.TaskListBackend.repository.UserRepository;
@@ -9,10 +10,12 @@ import cz.spsjecna.TaskListBackend.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -83,18 +86,29 @@ public class TaskController {
     return result;
   }
 
-  @DeleteMapping("/")
+  @DeleteMapping(value = "/{id}")
   @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
-  public Boolean deleteTask(@RequestBody UUID taskId, @RequestHeader (name="Authorization") String token) {
+  public Boolean deleteTask(@PathVariable String id, @RequestHeader (name="Authorization") String token) {
     String userName = jwtUtils.getUserNameFromJwtToken(token.replace("Bearer ", ""));
     Optional<User> u = userRepository.findByUsername(userName);
     boolean result = false;
     if (u != null) {
-      result = taskService.DeleteTask(taskId,u.get().getId());
-      log.info("DELETED TASK: " + u.get().getUsername() + " | TASK ID: " + taskId);
+      try {
+        String s2 = id.replace("-", "");
+        UUID uuid = new UUID(
+                new BigInteger(s2.substring(0, 16), 16).longValue(),
+                new BigInteger(s2.substring(16), 16).longValue());
+        result = taskService.DeleteTask(uuid, u.get().getId());
+        log.info("DELETED TASK: " + u.get().getUsername() + " | TASK ID: " + id);
+      }finally {
+
+      }
+
     }
     return result;
   }
+
+
 
   @GetMapping("/mod")
   @PreAuthorize("hasRole('MODERATOR')")

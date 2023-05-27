@@ -1,5 +1,8 @@
 package cz.spsjecna.TaskListBackend.payload.response;
 
+/**
+ * Register response DTO
+ */
 public final class MessageResponse {
   private String message;
 

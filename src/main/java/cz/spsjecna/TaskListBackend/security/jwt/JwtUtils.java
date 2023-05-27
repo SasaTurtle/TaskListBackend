@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * Token logic
+ */
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
@@ -21,6 +24,7 @@ public class JwtUtils {
     private int jwtExpirationMs;
 
     /**
+     * Generates JWT
      * @param authentication
      * @return
      */

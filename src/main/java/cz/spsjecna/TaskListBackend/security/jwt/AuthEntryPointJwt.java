@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ *Standard response code
  */
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
@@ -24,6 +24,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
   private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
   /**
+   *
    * @param request
    * @param response
    * @param authException

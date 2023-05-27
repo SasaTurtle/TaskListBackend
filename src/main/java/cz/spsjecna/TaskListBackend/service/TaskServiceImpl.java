@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Implementation of the business logic
+ */
 @Service
 public class TaskServiceImpl implements TaskService{
     @Autowired
@@ -42,6 +45,6 @@ public class TaskServiceImpl implements TaskService{
     @Override
     public boolean DeleteTask(UUID taskID, Long userId) {
         taskRepository.deleteById(taskID);
-        return false;
+        return true;
     }
 }

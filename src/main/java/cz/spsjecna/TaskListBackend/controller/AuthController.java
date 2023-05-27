@@ -47,9 +47,9 @@ public class AuthController {
   JwtUtils jwtUtils;
 
   /**
-   *
+   * Login call
    * @param loginRequest
-   * @return
+   * @return ResponseEntity (UserDetailImpl), JwtResponse
    */
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
@@ -74,9 +74,9 @@ public class AuthController {
   }
 
   /**
-   *
+   *Register call
    * @param signUpRequest
-   * @return
+   * @return String
    */
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
@@ -84,14 +84,12 @@ public class AuthController {
       return ResponseEntity
           .badRequest()
           .body(new MessageResponse("Error: Username is already taken!"));
-      //log.warn("Error: Username is already taken! " + signUpRequest.getUsername());
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
       return ResponseEntity
           .badRequest()
           .body(new MessageResponse("Error: Email is already in use!"));
-      //log.warn("Error: Email is already in use! " + signUpRequest.getEmail());
     }
 
     // Creates a new user's account

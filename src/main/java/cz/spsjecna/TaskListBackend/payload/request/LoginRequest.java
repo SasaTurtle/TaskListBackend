@@ -1,7 +1,7 @@
 package cz.spsjecna.TaskListBackend.payload.request;
 
 /**
- *
+ *LoginDTO
  */
 public class LoginRequest {
   private String username;

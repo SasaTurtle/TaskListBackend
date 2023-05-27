@@ -3,7 +3,7 @@ package cz.spsjecna.TaskListBackend.payload.response;
 import java.util.List;
 
 /**
- *
+ *Creates JWT login respose
  */
 public class JwtResponse {
   private String token;
